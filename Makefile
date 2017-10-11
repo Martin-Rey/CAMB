@@ -3,7 +3,7 @@
 #Set FISHER=Y to compile bispectrum fisher matrix code
 FISHER=
 
-#Will detect ifort/gfortran or edit for your compiler
+# Will detect ifort/gfortran or edit for your compiler
 ifneq ($(COMPILER),gfortran)
 ifortErr = $(shell which ifort >/dev/null; echo $$?)
 else
@@ -57,6 +57,13 @@ endif
 endif
 
 IFLAG = -I
+
+# Local gfortran
+F90C = /opt/local/bin/gfortran-mp-6
+FFLAGS =  -O3 -fopenmp -ffast-math -fmax-errors=4
+DEBUGFLAGS = -cpp -g -fbounds-check -fbacktrace -ffree-line-length-none -fmax-errors=4 -ffpe-trap=invalid,overflow,zero
+MODOUT =  -J$(OUTPUT_DIR)
+SMODOUT = -J$(DLL_DIR)
 
 #G95 compiler
 #F90C   = g95
